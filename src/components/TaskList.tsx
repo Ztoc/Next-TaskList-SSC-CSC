@@ -1,10 +1,18 @@
-import { getAllTasks } from '@/actions/taskActions';
-import { Task } from '@/db/schema';
 import Link from 'next/link';
+
 import RefreshButton from './RefreshButton';
 
+import { getAllTasks } from '@/actions/taskActions';
+import { Task } from '@/db/schema';
+
 const TaskList = async () => {
-  const taskList = await getAllTasks();
+  let taskList: Task[] = [];
+  try {
+    taskList = await getAllTasks();
+  } catch (error) {
+    console.error(error);
+    return <div>Error loading tasks</div>;
+  }
 
   return (
     <div className="rounded-lg bg-white p-6 shadow-md">

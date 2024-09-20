@@ -1,7 +1,9 @@
+import { eq } from 'drizzle-orm';
+
 import EditTaskForm from '@/components/EditTaskForm';
+
 import { db } from '@/db/client';
 import { tasks } from '@/db/schema';
-import { eq } from 'drizzle-orm';
 
 const fetchTaskById = async (id: number) => {
   return await db.select().from(tasks).where(eq(tasks.id, id));

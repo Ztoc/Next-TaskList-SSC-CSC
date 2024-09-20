@@ -1,6 +1,9 @@
-import { fetchTaskById } from '@/actions/taskActions';
+import Link from 'next/link';
+
 import DeleteTask from '@/components/DeleteTask';
 import EditTask from '@/components/EditTask';
+
+import { fetchTaskById } from '@/actions/taskActions';
 
 type TaskDetailPageProps = {
   params: {
@@ -14,6 +17,10 @@ export default async function TaskDetailPage({ params }: TaskDetailPageProps) {
   if (!task) {
     return (
       <div className="flex h-screen flex-col items-center justify-center">
+        <Link className="mb-4 w-fit cursor-pointer rounded-sm bg-gray-200 p-2" href={'/'}>
+          {' '}
+          &larr; To List
+        </Link>
         <h1 className="text-3xl font-bold text-gray-900">Task not found</h1>
       </div>
     );

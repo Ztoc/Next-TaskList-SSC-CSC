@@ -1,5 +1,6 @@
-import AddTaskForm from '@/components/AddTaskForm';
 import Link from 'next/link';
+
+import AddTaskForm from '@/components/AddTaskForm';
 
 export default function AddTaskPage() {
   return (
