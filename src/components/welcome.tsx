@@ -1,4 +1,4 @@
-import { getAllTasks } from '@/app/actions/taskActions';
+import { getAllTasks } from '@/actions/taskActions';
 import { Task } from '@/db/schema';
 import Link from 'next/link';
 

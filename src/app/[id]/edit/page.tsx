@@ -3,23 +3,30 @@ import { db } from '@/db/client';
 import { tasks } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
-// Fetch task by ID
-const fetchTaskById = async (id) => {
+const fetchTaskById = async (id: number) => {
   return await db.select().from(tasks).where(eq(tasks.id, id));
 };
 
-export default async function EditTaskPage({ params }) {
+type EditTaskPageProps = {
+  params: {
+    id: number;
+  };
+};
+
+export default async function EditTaskPage({ params }: EditTaskPageProps) {
   const { id } = params;
 
-  // Fetch task data
   const task = await fetchTaskById(id);
 
   if (!task || task.length === 0) {
     return <div>Task not found</div>;
   }
 
-  // Set default form values with the fetched task data
   const taskDetails = task[0];
 
-  return <EditTaskForm task={taskDetails} />;
+  return (
+    <div className="flex min-h-screen flex-col items-center justify-center">
+      <EditTaskForm task={taskDetails} />
+    </div>
+  );
 }

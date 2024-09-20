@@ -2,7 +2,11 @@
 
 import { useRouter } from 'next/navigation';
 
-const EditTask = ({ id }) => {
+type EditTaskProps = {
+  id: number;
+};
+
+const EditTask = ({ id }: EditTaskProps) => {
   const router = useRouter();
   return (
     <button
