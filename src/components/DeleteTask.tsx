@@ -1,11 +1,13 @@
 'use client';
 
-import { deleteTask } from '@/actions/taskActions';
-import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+
 import { ConfirmDialog } from './ConfirmDialog';
 import { Toaster } from './ui/toaster';
+
+import { deleteTask } from '@/actions/taskActions';
+import { useToast } from '@/hooks/use-toast';
 
 type DeleteTaskProps = {
   id: number;

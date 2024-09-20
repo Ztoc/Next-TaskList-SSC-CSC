@@ -1,9 +1,11 @@
 'use client';
 
+import { useState } from 'react';
+
+import { Toaster } from './ui/toaster';
+
 import { addTask } from '@/actions/taskActions';
 import { useToast } from '@/hooks/use-toast';
-import { useState } from 'react';
-import { Toaster } from './ui/toaster';
 
 export default function TaskForm() {
   const { toast } = useToast();
@@ -20,7 +22,6 @@ export default function TaskForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     try {
       const form = new FormData();
       form.append('title', formData.title);
