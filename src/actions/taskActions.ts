@@ -9,7 +9,8 @@ export const getAllTasks = async () => {
   return res;
 };
 export const fetchTaskById = async (id: number) => {
-  return await db.select().from(tasks).where(eq(tasks.id, id));
+  const res = await db.select().from(tasks).where(eq(tasks.id, id)).get();
+  return res;
 };
 
 export const addTask = async (formData: FormData) => {

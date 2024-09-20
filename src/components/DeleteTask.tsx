@@ -1,9 +1,11 @@
 'use client';
 
 import { deleteTask } from '@/actions/taskActions';
+import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { ConfirmDialog } from './ConfirmDialog';
+import { Toaster } from './ui/toaster';
 
 type DeleteTaskProps = {
   id: number;
@@ -11,6 +13,7 @@ type DeleteTaskProps = {
 
 const DeleteTask = ({ id }: DeleteTaskProps) => {
   const [open, setOpen] = useState(false);
+  const { toast } = useToast();
   const router = useRouter();
 
   const handleConfirm = () => {
@@ -18,11 +21,38 @@ const DeleteTask = ({ id }: DeleteTaskProps) => {
   };
   const handleDelete = async () => {
     try {
-      const res = await deleteTask(id);
-      router.push('/');
-      console.log('Task deleted successfully:', res);
+      await deleteTask(id);
+      toast({
+        title: 'Task Deleted successfully!',
+        description: 'you are redirecting list page.',
+        variant: 'destructive',
+        style: {
+          position: 'fixed',
+          top: '16px',
+          right: '16px',
+          zIndex: 9999,
+          backgroundColor: 'green',
+          width: '260px',
+          border: 'none',
+        },
+      });
+      setTimeout(() => {
+        router.push('/');
+      }, 2000);
     } catch (error) {
-      console.error('Error deleting task:', error);
+      toast({
+        title: 'Error occured while deleting task!',
+        variant: 'destructive',
+        style: {
+          position: 'fixed',
+          top: '16px',
+          right: '16px',
+          zIndex: 9999,
+          backgroundColor: 'red',
+          width: '260px',
+          border: 'none',
+        },
+      });
     }
   };
 
@@ -34,6 +64,7 @@ const DeleteTask = ({ id }: DeleteTaskProps) => {
         Delete Tasks
       </button>
       <ConfirmDialog open={open} setOpen={setOpen} handleConfirm={handleDelete} />
+      <Toaster />
     </>
   );
 };

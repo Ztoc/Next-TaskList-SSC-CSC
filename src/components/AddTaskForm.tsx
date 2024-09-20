@@ -1,4 +1,5 @@
 'use client';
+
 import { addTask } from '@/actions/taskActions';
 import { useToast } from '@/hooks/use-toast';
 import { useState } from 'react';
@@ -11,7 +12,6 @@ export default function TaskForm() {
     description: '',
     dueDate: '',
   });
-  const [error, setError] = useState(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -66,8 +66,6 @@ export default function TaskForm() {
   return (
     <>
       <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-        {error && <p className="text-red-500">{error}</p>}
-
         <input
           type="text"
           name="title"

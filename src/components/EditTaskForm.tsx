@@ -3,9 +3,9 @@
 import { updateTask } from '@/actions/taskActions';
 import { Task } from '@/db/schema';
 import { useToast } from '@/hooks/use-toast';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import BackButton from './BackButton';
 import { Toaster } from './ui/toaster';
 
 type EditTaskFormProps = {
@@ -62,10 +62,13 @@ const EditTaskForm = ({ task }: EditTaskFormProps) => {
 
   return (
     <>
+      <Link className="mb-4 w-fit cursor-pointer rounded-sm bg-gray-200 p-2" href={'/'}>
+        {' '}
+        &larr; To List
+      </Link>
       <form
         onSubmit={handleSubmit}
-        className="mx-auto w-3/4 max-w-2xl rounded-lg bg-white p-6 shadow-md">
-        <BackButton />
+        className="mx-auto mb-4 w-3/4 max-w-2xl rounded-lg bg-white p-6 shadow-md">
         <h1 className="mb-4 text-2xl font-bold">Edit Task</h1>
         <div className="mb-4">
           <label className="block text-gray-700">Title</label>
