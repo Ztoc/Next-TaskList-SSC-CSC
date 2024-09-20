@@ -1,14 +1,9 @@
-import { db } from '@/db/client';
-import { Task, tasks } from '@/db/schema';
+import { getAllTasks } from '@/app/actions/taskActions';
+import { Task } from '@/db/schema';
 import Link from 'next/link';
 
-const fetchTasks = async () => {
-  return await db.select().from(tasks);
-};
-
-const TaskList = async () => {
-  const taskList = await fetchTasks();
-
+const Welcome = async () => {
+  const taskList = await getAllTasks();
   return (
     <div className="rounded-lg bg-white p-6 shadow-md">
       <h1 className="mb-4 text-2xl font-bold text-gray-800">Task List</h1>
@@ -18,6 +13,7 @@ const TaskList = async () => {
             <th className="border-b px-4 py-2 text-left">No</th>
             <th className="border-b px-4 py-2 text-left">Title</th>
             <th className="border-b px-4 py-2 text-left">Due Date</th>
+            <th className="border-b px-4 py-2 text-left"></th>
           </tr>
         </thead>
         <tbody>
@@ -26,6 +22,9 @@ const TaskList = async () => {
               <td className="border-b px-4 py-2">{index + 1}</td>
               <td className="border-b px-4 py-2">{task.title}</td>
               <td className="border-b px-4 py-2">{new Date(task.dueDate).toLocaleDateString()}</td>
+              <td className="border-b px-4 py-2">
+                <Link href={`/${task.id}`}>&rarr;</Link>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -39,4 +38,4 @@ const TaskList = async () => {
   );
 };
 
-export default TaskList;
+export default Welcome;
